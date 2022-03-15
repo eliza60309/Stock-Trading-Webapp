@@ -8,10 +8,10 @@ import { WatchlistComponent } from '../components/watchlist/watchlist.component'
 import { DummyComponent } from '../components/dummy/dummy.component';
 
 const routes: Routes = [
-  { path: '/search/home', component: DummyComponent},
-  { path: '/search/:stock_id', component: ProfileComponent },
-  { path: '/watchlist', component: WatchlistComponent },
-  { path: '/portfolio', component: PortfolioComponent}
+  { path: 'search/home', component: DummyComponent},
+  { path: 'search/:stock_id', component: ProfileComponent},
+  { path: 'watchlist', component: WatchlistComponent},
+  { path: 'portfolio', component: PortfolioComponent}
 ];
 
 @NgModule({

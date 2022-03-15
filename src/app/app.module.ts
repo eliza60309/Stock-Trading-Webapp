@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -13,6 +13,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { DummyComponent } from './components/dummy/dummy.component';
+import { AutoCompleteComponent } from './services/auto-complete/auto-complete.component';
+import { AutoCompleteService } from './services/auto-complete/auto-complete.service';
 
 
 
@@ -26,14 +28,18 @@ import { DummyComponent } from './components/dummy/dummy.component';
     ProfileComponent,
     WatchlistComponent,
     PortfolioComponent,
-    DummyComponent
+    DummyComponent,
+    AutoCompleteComponent
   ],
   imports: [
+    HttpClientModule,
     AppRouterModule,
     BrowserModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    AutoCompleteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

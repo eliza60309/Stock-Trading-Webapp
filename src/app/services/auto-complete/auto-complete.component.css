@@ -1,0 +1,15 @@
+ul {
+    margin: auto;
+    list-style-type: none;
+    width: 40%;
+}
+button {
+    width: 80%;
+    line-height: 40px;
+    background-color: white;
+    box-shadow: 0 3px 7px grey;
+    border: none;
+}
+button:hover {
+    background-color: lightgrey;
+}

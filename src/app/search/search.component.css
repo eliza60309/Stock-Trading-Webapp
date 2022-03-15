@@ -1,0 +1,44 @@
+.container
+{
+    width: 100%;
+    text-align: center;
+}
+h1 
+{
+    margin: 50px 0px;
+    font-weight: bold;
+}
+#search
+{
+    border-radius: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(30,32,161);
+    width: 50%;
+    min-height: 35px;
+    margin: auto;
+    line-height: 35px;
+}
+#input
+{
+    width: 80%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0 10px;
+}
+#search_btn
+{
+    color: rgb(30,32,161);
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+#clear_btn
+{
+    color: rgb(30,32,161);
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+
