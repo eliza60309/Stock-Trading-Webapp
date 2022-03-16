@@ -1,11 +1,11 @@
 <div>
     <ul>
         <li *ngIf="isLoading">
-            <button><mat-spinner [diameter]="40"></mat-spinner></button>
+            <mat-spinner [diameter]="40"></mat-spinner>
         </li>
         <span *ngIf="!isLoading" >
             <li *ngFor="let item of list">
-                <a href="search/{{item.displaySymbol}}"><button>{{item.displaySymbol}} | {{item.description}}</button></a>
+                <a [routerLink]="'/search/' + item.displaySymbol"><button>{{item.displaySymbol}} | {{item.description}}</button></a>
             </li>
         </span>
     </ul>

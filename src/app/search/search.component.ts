@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,9 +7,22 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  
   text :string = ""; 
   control = new FormControl('');
+
+  @Output() cancelEvent: EventEmitter<null> = new EventEmitter();
+  @Output() displayEvent: EventEmitter<null> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void { }
+
+  emitCancelEvent() {
+    this.cancelEvent.emit();
+  }
+
+  emitDisplayEvent() {
+    this.displayEvent.emit();
+  }
 }

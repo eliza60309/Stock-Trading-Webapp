@@ -9,7 +9,6 @@ import { DummyComponent } from '../components/dummy/dummy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'search/home', pathMatch: 'full'},
-  { path: 'search/home', component: DummyComponent},
   { path: 'search/:stock_id', component: ProfileComponent},
   { path: 'search', component: ProfileComponent},
   { path: 'watchlist', component: WatchlistComponent},

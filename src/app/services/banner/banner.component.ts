@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component,  OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { timeout } from 'rxjs';
 import { MainService } from '../main.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { MainService } from '../main.service';
 })
 export class BannerComponent implements OnInit {
 
-  @Output() updateNoData = new EventEmitter<null>();
-  @Output() updateComplete = new EventEmitter<null>();
+  @Output() emitNoDataEvent = new EventEmitter<null>();
+  @Output() emitCompleteEvent = new EventEmitter<null>();
+  emitted: boolean = false;
   hide: boolean = true;
   
   @Input() stock_id: string = "";
@@ -33,11 +35,17 @@ export class BannerComponent implements OnInit {
   ngOnInit(): void {
     this.updateQuery();
     this.updateQuote();
+    setTimeout(() => this.loadComplete(), 5000);
+    console.log("init" + this.stock_id);
   }
 
-  imageLoad(){
-    this.updateComplete.emit();
-    this.hide = false;
+  loadComplete(){
+    if(!this.emitted) {
+      this.emitCompleteEvent.emit();
+      this.emitted = true;
+      this.hide = false;
+      console.log("emit" + this.stock_id);
+    }
   }
 
   updateQuery(): void {
@@ -53,7 +61,7 @@ export class BannerComponent implements OnInit {
         this.logo = data.body.logo;
       }
       else
-        this.updateNoData.emit();
+        this.emitNoDataEvent.emit();
     });
   }
 
