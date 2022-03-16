@@ -1,7 +1,12 @@
 <div>
     <ul>
-        <li *ngFor="let item of object">
-            <button>{{item.displaySymbol}} | {{item.description}}</button>
+        <li *ngIf="isLoading">
+            <button><mat-spinner [diameter]="40"></mat-spinner></button>
         </li>
+        <span *ngIf="!isLoading" >
+            <li *ngFor="let item of list">
+                <a href="search/{{item.displaySymbol}}"><button>{{item.displaySymbol}} | {{item.description}}</button></a>
+            </li>
+        </span>
     </ul>
 </div>

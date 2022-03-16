@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  stock_id: string = "";
+  isLoading: boolean = true;
+  noDataFlag: boolean = false;
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(data => {
+      if(data.get("stock_id"))
+        this.stock_id = data.get("stock_id")!;
+    });
+  }
+  complete() {
+    this.isLoading = false;
   }
 
+  noData() {
+    this.noDataFlag = true;
+    this.isLoading = false;
+  }
 }

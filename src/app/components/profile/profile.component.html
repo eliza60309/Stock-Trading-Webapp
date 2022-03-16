@@ -1,1 +1,3 @@
-<p>profile works!</p>
+<mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
+No Data: {{noDataFlag}}
+<app-banner (updateComplete)="complete()" (updateNoData)="noData()" [stock_id]="stock_id"></app-banner>

@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AutoCompleteService } from './auto-complete.service';
-
-//import { Observable } from 'rxjs';
-
+import { Component, Input, OnInit } from '@angular/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-auto-complete',
@@ -10,12 +8,37 @@ import { AutoCompleteService } from './auto-complete.service';
   styleUrls: ['./auto-complete.component.css']
 })
 export class AutoCompleteComponent implements OnInit {
-  object: Array<any> = [];
-  constructor(private autoCompleteService: AutoCompleteService) { }
+  list: Array<any> = [];
+  isLoading: boolean = false;
+  nowIndex: number = 0;
+
+  constructor(private mainService: MainService) { }
+  
   ngOnInit(): void { }
+  
   get(stock_id :string) {
-    this.autoCompleteService.get(stock_id)
-    .subscribe(data => this.object = data.body.result);
-    console.log(this.object);
+    if(stock_id == "") {
+      this.list = [];
+      return;
+    }
+    let index = ++this.nowIndex;
+    this.isLoading = true;
+    this.mainService.get(
+      "auto",
+      [{key: "STOCK_ID", value: stock_id}]
+    )
+    .subscribe(data => {
+      let tmplist = [];
+      if(data.body.result) {
+        for(let i of data.body.result) {
+          if(i.symbol && !i.symbol.includes(".") && i.symbol != "")
+            tmplist.push(i);
+        }
+        if(this.nowIndex == index) {
+          this.isLoading = false;
+          this.list = tmplist;
+        }
+      }
+    });
   }
 }

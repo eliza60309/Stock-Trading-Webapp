@@ -1,0 +1,17 @@
+<div [hidden]="hide">
+    <div name="left">
+        Ticker: {{ticker}}<br>
+        Name: {{name}}<br>
+        Exchange: {{exchange}}
+    </div>
+    <div name="middle">
+        <img (load)="imageLoad()" src="{{logo}}">
+    </div>
+    <div name="right">
+        Last Price: {{c}}<br>
+        Change: {{d}}<br>
+        Change Percent: {{dp}}<br>
+        Time Stamp: {{t * 1000}}<br>
+        Market Open: {{marketOpen}}
+    </div>
+</div>
