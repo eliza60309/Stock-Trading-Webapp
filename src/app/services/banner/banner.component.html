@@ -1,17 +1,20 @@
-<div [hidden]="hide">
-    <div name="left">
-        Ticker: {{ticker}}<br>
+<div [hidden]="hide" class="root">
+    <div name="left" class="block">
+        <div id="title">{{ticker}}</div>
         Name: {{name}}<br>
         Exchange: {{exchange}}
+        <button type="button" class="btn btn-success" (click)="watchlistService.add(ticker)">Buy</button>
+        <button type="button" class="btn btn-danger" (click)="watchlistService.remove(ticker)">Sell</button>
     </div>
-    <div name="middle">
+    <div name="middle" class="block">
         <img (load)="loadComplete()" src="{{logo}}">
     </div>
-    <div name="right">
+    <div name="right" class="block">
         Last Price: {{c}}<br>
         Change: {{d}}<br>
         Change Percent: {{dp}}<br>
         Time Stamp: {{t * 1000}}<br>
-        Market Open: {{marketOpen}}
+        Market Open: {{marketOpen}}<br>
+        UpdateTime: {{updateTime}}
     </div>
 </div>

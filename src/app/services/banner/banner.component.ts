@@ -1,6 +1,8 @@
 import { Component,  OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { timeout } from 'rxjs';
 import { MainService } from '../main.service';
+import { ProfileService } from '../profile.service';
+import { UrlService } from '../url.service';
+import { WatchlistService } from '../watchlist.service';
 
 @Component({
   selector: 'app-banner',
@@ -9,8 +11,9 @@ import { MainService } from '../main.service';
 })
 export class BannerComponent implements OnInit {
 
-  @Output() emitNoDataEvent = new EventEmitter<null>();
-  @Output() emitCompleteEvent = new EventEmitter<null>();
+  @Output() emitNoDataEvent: EventEmitter<null> = new EventEmitter<null>();
+  @Output() emitCompleteEvent: EventEmitter<null> = new EventEmitter<null>();
+  @Output() emitColorEvent: EventEmitter<boolean> =  new EventEmitter<boolean>();
   emitted: boolean = false;
   hide: boolean = true;
   
@@ -27,24 +30,30 @@ export class BannerComponent implements OnInit {
   d: number = 0;
   dp: number = 0;
   t: number = 0;
-
-  constructor(private mainService: MainService) {
+  timeout: any = null;
+  interval: any = null;
+  constructor(private mainService: MainService, private urlService: UrlService, public watchlistService: WatchlistService, public profileService: ProfileService) {
     this.updateTime = new Date().getTime();
+    this.urlService.listener$.subscribe((url: string) => {
+      this.stock_id = url;
+      this.updateQuery();
+      this.updateQuote();
+      clearTimeout(this.timeout);
+      clearInterval(this.interval);
+      this.timeout = setTimeout(() => this.loadComplete(), 5000);
+      this.interval = setInterval(() => this.updateQuote(), 15000);
+      this.emitted = false;
+    });
   }
   
-  ngOnInit(): void {
-    this.updateQuery();
-    this.updateQuote();
-    setTimeout(() => this.loadComplete(), 5000);
-    console.log("init" + this.stock_id);
-  }
+  ngOnInit(): void { }
 
-  loadComplete(){
+  loadComplete() {
     if(!this.emitted) {
       this.emitCompleteEvent.emit();
+      this.profileService.bannerUpdate(true);
       this.emitted = true;
       this.hide = false;
-      console.log("emit" + this.stock_id);
     }
   }
 
@@ -65,6 +74,10 @@ export class BannerComponent implements OnInit {
     });
   }
 
+  round(num: number): number {
+    return Math.round(num * 100) / 100;
+  }
+
   updateQuote(): void {
     this.mainService.get(
       "quote",
@@ -72,12 +85,13 @@ export class BannerComponent implements OnInit {
     )
     .subscribe(data => {
       if(data.body && Object.keys(data.body).length != 0) {
-        this.c = data.body.c;
-        this.d = data.body.d == null? 0: data.body.d;
-        this.dp = data.body.dp == null? 0: data.body.dp;
-        this.t = data.body.t;
+        this.c = this.round(data.body.c);
+        this.d = data.body.d == null? 0: this.round(data.body.d);
+        this.dp = data.body.dp == null? 0: this.round(data.body.dp);
+        this.t = this.round(data.body.t);
         this.updateTime = new Date().getTime();
         this.marketOpen = data.body.t * 1000 + 60000 > this.updateTime? true: false;
+        this.d >= 0? this.emitColorEvent.emit(true): this.emitColorEvent.emit(false);
       }
     });
   }

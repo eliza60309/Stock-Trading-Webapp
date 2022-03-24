@@ -18,5 +18,4 @@ export class MainService {
     }  
     return this.http.get<any>(this.url + suffix, {params: param, observe: 'response'});
   }
-
 }

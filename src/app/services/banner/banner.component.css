@@ -1,0 +1,19 @@
+.block {
+    display: inline-block;
+}
+
+[name="left"], [name="right"] {
+    width: 40%;
+}
+
+[name="center"] {
+    width: 20%;
+}
+
+#title {
+    font-size: 40px;
+}
+
+.root {
+    height: 200px;
+}

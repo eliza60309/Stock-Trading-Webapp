@@ -1,11 +1,17 @@
-<div>
+<div class="root">
     <ul>
-        <li *ngIf="isLoading">
-            <mat-spinner [diameter]="40"></mat-spinner>
-        </li>
+        <span>
+            <li *ngIf="isLoading">
+                <button>
+                    <mat-spinner [diameter]="40"></mat-spinner>
+                </button>
+            </li>
+        </span>
         <span *ngIf="!isLoading" >
             <li *ngFor="let item of list">
-                <a [routerLink]="'/search/' + item.displaySymbol"><button>{{item.displaySymbol}} | {{item.description}}</button></a>
+                <button [routerLink]="'/search/' + item.displaySymbol" (click)="this.urlService.updateUrl(item.displaySymbol)">
+                    {{item.displaySymbol}} | {{item.description}}
+                </button>
             </li>
         </span>
     </ul>

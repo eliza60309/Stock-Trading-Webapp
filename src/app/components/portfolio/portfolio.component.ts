@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioComponent implements OnInit {
 
-  constructor() { }
+  cons: number = 0;
+  init: number = 0;
+  elapsed: number = 0;
+  constructor() { 
+    this.cons = new Date().getTime();
+    setInterval(() => {this.elapsed = new Date().getTime() - this.cons}, 1000);
+  }
 
   ngOnInit(): void {
+    this.init = new Date().getTime() - this.cons;
   }
 
 }

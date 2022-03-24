@@ -1,0 +1,19 @@
+<p>insight works!</p>
+Twitter: {{twitter_total}}<br>
+{{twitter_pos}}<br>
+{{twitter_neg}}<br>
+Reddit: {{reddit_total}}<br>
+{{reddit_pos}}<br>
+{{reddit_neg}}<br>
+<highcharts-chart
+    *ngIf="update1"
+    [Highcharts]="Highcharts1" 
+    [options]="chartOptions1">
+</highcharts-chart>
+<highcharts-chart
+    *ngIf="update2"
+    [Highcharts]="Highcharts2" 
+    [options]="chartOptions2">
+</highcharts-chart>
+123
+<!--[constructorType]="'stockChart'"-->

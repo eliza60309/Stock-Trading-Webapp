@@ -1,22 +1,25 @@
-<nav class="navbar navbar-expand-lg mb-3">
+<nav class="navbar navbar-expand-lg mb-3 text">
     <div class="container-fluid">
-      <a class="navbar-brand text" [routerLink]="'/search/home'">Stock Search</a>
+      <a class="navbar-brand text" id="main" [routerLink]="'/search/home'" (click)="activate(0)">Stock Search</a>
       <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
         &#9776;
       </button>
       <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-        <ul class="navbar-nav fr">
-          <li class="nav-item">
-            <a class="nav-link text" [routerLink]="'/search/A'" (click)="isMenuCollapsed = true">Search</a>
+        <ul ngbNav [animation]="false" [(activeId)]="activeId" class="navbar-nav fr" #nav="ngbNav">
+          <li class="nav-item" [ngbNavItem]="1" [destroyOnHide]="false">
+            <a class="nav-link text" [routerLink]="'/search/' + getUrl()" [class]="getClass(1)" (click)="activate(1)" ngbNavLink>Search</a>
+            <ng-template ngbNavContent><app-profile></app-profile></ng-template>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text" [routerLink]="'/watchlist'" (click)="isMenuCollapsed = true">Watchlist</a>
+          <li class="nav-item" [ngbNavItem]="2" [destroyOnHide]="false">
+            <a class="nav-link text" [routerLink]="'/watchlist'" [class]="getClass(2)" (click)="activate(2)" ngbNavLink>Watchlist</a>
+            <ng-template ngbNavContent><app-watchlist></app-watchlist></ng-template>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text" [routerLink]="'/portfolio'" (click)="isMenuCollapsed = true">Portfolio</a>
+          <li class="nav-item" [ngbNavItem]="3" [destroyOnHide]="false">
+            <a class="nav-link text" [routerLink]="'/portfolio'" [class]="getClass(3)" (click)="activate(3)" ngbNavLink>Portfolio</a>
+            <ng-template ngbNavContent><app-portfolio></app-portfolio></ng-template>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

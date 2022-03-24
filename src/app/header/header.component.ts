@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlService } from '../services/url.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public isMenuCollapsed = true;
-  constructor() { }
+  public activated: number = 0;
+  public activeId: number = 1;
+  constructor(public urlService: UrlService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  getClass(num: number) {
+    if(num == this.activated)
+      return "active";
+    else
+      return "";
   }
 
+  getUrl() {
+    return UrlService.url;
+  }
+
+  activate(num: number) {
+    this.activated = num;
+    this.isMenuCollapsed = true;
+  }
 }

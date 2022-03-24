@@ -1,0 +1,28 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1" [destroyOnHide]="false">
+        <a ngbNavLink>Summary</a>
+        <ng-template ngbNavContent>
+            <app-summary [colorGreen]="colorGreen"></app-summary>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="2" [destroyOnHide]="false">
+        <a ngbNavLink>Top News</a>
+        <ng-template ngbNavContent>
+            <app-top-news></app-top-news>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="3" [destroyOnHide]="false">
+        <a ngbNavLink>Charts</a>
+        <ng-template ngbNavContent>
+            <app-charts></app-charts>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="4" [destroyOnHide]="false">
+        <a ngbNavLink>Insights</a>
+        <ng-template ngbNavContent>
+            <app-insight></app-insight>
+        </ng-template>
+    </li>
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>

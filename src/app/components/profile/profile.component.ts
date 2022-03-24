@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
+import { UrlService } from '../../services/url.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,40 +11,67 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   stock_id: string = "";
-  loadingDisplayed: boolean = false;
+  /*loadingDisplayed: boolean = false;
   errorDisplayed: boolean = false;
   profileWorking: boolean = false;
-  profileDisplayed: boolean = false;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  profileDisplayed: boolean = false;*/
+  colorGreen: boolean = true;
+  display: boolean = false;
+  loading: boolean = false;
+  error: boolean = false;
+  constructor(private urlService: UrlService, public profileService: ProfileService) {
+    this.urlService.listener$.subscribe((url: string) => {
+      //this.startWorking(url);
+      this.reset();
+      this.profileService.request();
+      this.loading = true;
+    });
 
-/*
-  ngOnChanges(changes: SimpleChanges): void {
-    this.route.paramMap.subscribe(data => {
-      if(data.get("stock_id") && data.get("stock_id") != "home") {
-        this.stock_id = data.get("stock_id")!;
-        this.loadingDisplayed = true;
-        this.profileWorking = true;
+    this.profileService.listener$.subscribe((msg: string) => {
+      //this.startWorking(url);
+      if(msg == "success") {
+        this.success();
+      }
+      else if(msg == "failed") {
+        this.failed();
       }
     });
-    console.log("change");
-  }*/
+   }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
-      if(data.get("stock_id") && data.get("stock_id") != "home") {
-        this.stock_id = data.get("stock_id")!;
-        if(this.profileWorking) {
-          this.cancelDisplay();
-          setTimeout(() => this.profileWorking = true, 300);
-        }
-        else
-          this.profileWorking = true;
-        
-        this.loadingDisplayed = true;
-      }
-    });
+  ngOnInit(): void { }
+
+  success() {
+    this.display = true;
+    this.loading = false;
   }
-  
+
+  failed() {
+    this.error = true;
+    this.loading = false;
+  }
+
+  reset() {
+    this.display = false;
+    this.error = false;
+    this.loading = false;
+  }
+  /*
+  startWorking(url: string) {
+    if(url != "" && url != "home") {
+      this.stock_id = url;
+      if(this.profileWorking) {
+        this.cancelDisplay();
+        setTimeout(() => {this.profileWorking = true}, 300);
+      }
+      else
+        this.profileWorking = true;
+      this.loadingDisplayed = true;
+    }
+  }
+
+  receiveColor(color: boolean) {
+    this.colorGreen = color;
+  }
 
   receiveComplete() {
     this.loadingDisplayed = false;
@@ -50,7 +79,7 @@ export class ProfileComponent implements OnInit {
   }
 
   receiveNoData() {
-    this.profileWorking = false;
+    //this.profileWorking = false;
     this.profileDisplayed = false;
     this.loadingDisplayed = false;
     this.errorDisplayed = true;
@@ -58,10 +87,9 @@ export class ProfileComponent implements OnInit {
 
   cancelDisplay() {
     this.profileDisplayed = false;
-    this.profileWorking = false;
+   // this.profileWorking = false;
     this.loadingDisplayed = false;
     this.errorDisplayed = false;
   }
-
-
+  */
 }

@@ -2,10 +2,21 @@
     width: 100%;
     background-color: rgb(30,32,161);
 }
-.fr{
+.fr {
     right: 10%;
-    /*position: absolute;*/
+
 }
-.text{
+.text {
+    color: lightgrey;
+}
+.active {
+    border: 1px white solid;
+    border-radius: 15px;
+    color: white;
+}
+#main {
+    color: white;
+}
+a:hover {
     color: white;
 }

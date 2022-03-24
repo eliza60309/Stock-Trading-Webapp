@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular'
+
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -16,9 +18,18 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { AutoCompleteComponent } from './services/auto-complete/auto-complete.component';
-import { MainService } from './services/main.service';
 import { BannerComponent } from './services/banner/banner.component';
-
+import { TabsComponent } from './services/tabs/tabs.component';
+import { SummaryComponent } from './services/tabs/summary/summary.component';
+import { TopNewsComponent } from './services/tabs/top-news/top-news.component';
+import { ChartsComponent } from './services/tabs/charts/charts.component';
+import { InsightComponent } from './services/tabs/insight/insight.component';
+import { HighchartsChartComponent } from 'highcharts-angular';
+import { ChartModule } from 'angular-highcharts';
+import { MainService } from './services/main.service';
+import { UrlService } from './services/url.service';
+import { WatchlistService } from './services/watchlist.service';
+import { ProfileService } from './services/profile.service';
 
 
 @NgModule({
@@ -33,9 +44,16 @@ import { BannerComponent } from './services/banner/banner.component';
     PortfolioComponent,
     DummyComponent,
     AutoCompleteComponent,
-    BannerComponent
+    BannerComponent,
+    TabsComponent,
+    SummaryComponent,
+    TopNewsComponent,
+    ChartsComponent,
+    InsightComponent
   ],
   imports: [
+    HighchartsChartModule,
+    ChartModule,
     ReactiveFormsModule,
     FormsModule,
     MatProgressSpinnerModule,
@@ -45,7 +63,10 @@ import { BannerComponent } from './services/banner/banner.component';
     NgbModule
   ],
   providers: [
-    MainService
+    MainService,
+    UrlService,
+    WatchlistService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

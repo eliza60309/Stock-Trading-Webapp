@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { UrlService } from '../services/url.service';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,7 @@ export class SearchComponent implements OnInit {
   @Output() cancelEvent: EventEmitter<null> = new EventEmitter();
   @Output() displayEvent: EventEmitter<null> = new EventEmitter();
 
-  constructor() { }
+  constructor(public urlService: UrlService) { }
 
   ngOnInit(): void { }
 

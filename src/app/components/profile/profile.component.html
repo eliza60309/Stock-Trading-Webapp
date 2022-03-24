@@ -1,8 +1,19 @@
-<app-search (cancelEvent)="cancelDisplay()">
-</app-search>
-<mat-spinner *ngIf="loadingDisplayed" [diameter]="40">
-</mat-spinner>
-{{stock_id}}
-No Data: {{errorDisplayed}}
-<app-banner *ngIf="profileWorking" [hidden]="!profileDisplayed" (emitCompleteEvent)="receiveComplete()" (emitNoDataEvent)="receiveNoData()" [stock_id]="stock_id">
-</app-banner>
+ <div class="max">
+    <app-search (cancelEvent)="reset()" >
+    </app-search>
+    <mat-spinner *ngIf="loading" [diameter]="40">
+    </mat-spinner>
+    <div class="container">
+        <!--
+        <app-banner  [hidden]="!profileDisplayed" [stock_id]="stock_id" (emitCompleteEvent)="receiveComplete()" (emitNoDataEvent)="receiveNoData()" (emitColorEvent)="receiveColor($event)">
+        </app-banner>
+        <app-tabs  [hidden]="!profileDisplayed" [stock_id]="stock_id" [colorGreen]="colorGreen">
+        </app-tabs>
+        -->
+        <app-banner  [hidden]="!display">
+        </app-banner>
+        <app-tabs  [hidden]="!display" [stock_id]="stock_id" [colorGreen]="colorGreen">
+        </app-tabs>
+    </div>
+</div>
+<!--*ngIf="profileWorking" for app-banner and app-tabs -->

@@ -9,10 +9,10 @@ import { DummyComponent } from '../components/dummy/dummy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'search/home', pathMatch: 'full'},
-  { path: 'search/:stock_id', component: ProfileComponent},
-  { path: 'search', component: ProfileComponent},
-  { path: 'watchlist', component: WatchlistComponent},
-  { path: 'portfolio', component: PortfolioComponent}
+  { path: 'search/:stock_id', component: DummyComponent},
+  { path: 'search', component: DummyComponent},
+  { path: 'watchlist', component: DummyComponent},
+  { path: 'portfolio', component: DummyComponent}
 ];
 
 @NgModule({

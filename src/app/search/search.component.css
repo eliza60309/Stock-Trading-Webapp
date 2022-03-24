@@ -1,7 +1,8 @@
-.container
+.max
 {
     width: 100%;
     text-align: center;
+    margin: 0px;
 }
 h1 
 {
@@ -14,7 +15,7 @@ h1
     border-width: 3px;
     border-style: solid;
     border-color: rgb(30,32,161);
-    width: 50%;
+    width: 30%;
     min-width: 400px;
     min-height: 35px;
     margin: auto;
@@ -46,4 +47,6 @@ h1
     border: none;
     display: inline-block;
 }
-
+app-auto-complete {
+    width: 100%;
+}

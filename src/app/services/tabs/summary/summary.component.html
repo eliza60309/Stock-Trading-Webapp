@@ -1,0 +1,19 @@
+<div>
+    <p>summary works!</p>
+    High: {{h}}<br>
+    Low: {{l}}<br>
+    Open: {{o}}<br>
+    Previous Close: {{pc}}<br>
+    IPO: {{ipo}}<br>
+    Industry: {{industry}}<br>
+    Website: {{webpage}}<br>
+    <!--
+    <highcharts-chart
+    [Highcharts] = "Highcharts" 
+    [options] = "chartOptions" 
+    style = "width: 100%; height: 400px; display: block;">
+    </highcharts-chart>
+    -->
+    <div [chart]="chart"></div>
+    peers: <a *ngFor="let item of peers" [routerLink]="'/search/' + item">{{item}},&nbsp;</a>
+<div>

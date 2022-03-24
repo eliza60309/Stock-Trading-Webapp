@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MainService } from '../main.service';
+import { UrlService } from '../url.service';
 
 @Component({
   selector: 'app-auto-complete',
@@ -12,7 +12,7 @@ export class AutoCompleteComponent implements OnInit {
   isLoading: boolean = false;
   nowIndex: number = 0;
 
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, public urlService: UrlService) { }
   
   ngOnInit(): void { }
   
@@ -34,7 +34,8 @@ export class AutoCompleteComponent implements OnInit {
           if(i.symbol && !i.symbol.includes(".") && i.symbol != "")
             tmplist.push(i);
         }
-        if(this.nowIndex == index) {
+        if(this.nowIndex <= index) {
+          this.nowIndex = index;
           this.isLoading = false;
           this.list = tmplist;
         }
