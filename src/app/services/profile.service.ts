@@ -7,6 +7,9 @@ export class ProfileService {
   private static tunnel = new Subject<string>();
   listener$ = ProfileService.tunnel.asObservable();
 
+  private static colormsg = new Subject<boolean>();
+  listener2 = ProfileService.colormsg.asObservable();
+
   static loading: boolean = false;
   static showProfile: boolean = false;
   static showError: boolean = false;
@@ -18,6 +21,8 @@ export class ProfileService {
   static insightReady: boolean = false;
   static ticker: boolean = true;
   constructor() { }
+
+
   
   reset() {
     ProfileService.loading = false;
@@ -33,6 +38,7 @@ export class ProfileService {
 
   setTicker(bool: boolean) {
     ProfileService.ticker = bool;
+    ProfileService.colormsg.next(bool);
   }
 
   request() {
@@ -96,15 +102,12 @@ export class ProfileService {
   }
 
   checkDone() {
-    console.log(ProfileService.bannerReady , ProfileService.chartsReady);
-
     if(ProfileService.bannerReady &&
       //ProfileService.summaryReady &&
       ProfileService.chartsReady// &&
       //ProfileService.newsReady &&
       //ProfileService.insightReady
       ) {
-
       ProfileService.showProfile = true;
       this.updateProfile("success");
     }

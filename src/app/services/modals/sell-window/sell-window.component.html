@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{stock_id}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="mb-3">
+            Current Price: {{price}}<br>
+            Money in Wallet: ${{cash}}<br>
+            Quantity: <input class="form-control" type="number" (input)="verifyQuant()" [formControl]="control" [(ngModel)]="quant">
+        </div>
+        <div class="red" *ngIf="!enabled">
+            You cannot sell the stocks that you don't have!
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="me-auto">Total: {{total}}</div>
+    <button [disabled]="!enabled" type="button" class="btn btn-success" (click)="sell()">Sell</button>
+</div>

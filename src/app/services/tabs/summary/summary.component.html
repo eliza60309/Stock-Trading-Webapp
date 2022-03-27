@@ -1,19 +1,42 @@
-<div>
-    <p>summary works!</p>
-    High: {{h}}<br>
-    Low: {{l}}<br>
-    Open: {{o}}<br>
-    Previous Close: {{pc}}<br>
-    IPO: {{ipo}}<br>
-    Industry: {{industry}}<br>
-    Website: {{webpage}}<br>
-    <!--
-    <highcharts-chart
-    [Highcharts] = "Highcharts" 
-    [options] = "chartOptions" 
-    style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-    -->
-    <div [chart]="chart"></div>
-    peers: <a *ngFor="let item of peers" [routerLink]="'/search/' + item">{{item}},&nbsp;</a>
-<div>
+<div id="root">
+    <div id="left">
+        <div id="top">
+            <table>
+                <tr>
+                    <th>High Price:</th>
+                    <td>{{h}}</td>
+                </tr>
+                <tr>
+                    <th>Low Price:</th>
+                    <td>{{l}}</td>
+                </tr>
+                <tr>
+                    <th>Open Price:</th>
+                    <td>{{o}}</td>
+                </tr>
+                <tr>
+                    <th>Prev. Close:</th>
+                    <td>{{pc}}</td>
+                </tr>
+            </table>
+        </div>
+        <div id="title">
+            About the company
+        </div>
+        <div id="bottom">
+            <b>IPO Start Date:</b>&nbsp;{{ipo}}<br>
+            <b>Industry:</b>&nbsp;{{industry}}<br>
+            <b>Webpage:</b>&nbsp;<a href="{{webpage}}" target="_blank" rel="noopener noreferer">{{webpage}}</a><br>
+            <b>Company Peers:</b><br>
+            <a class="links" *ngFor="let item of peers" [routerLink]="'/search/' + item" (click)="this.urlService.updateUrl(item)">{{item}},&nbsp;</a>
+        </div>
+    </div>
+    <div id="right">
+        <highcharts-chart 
+            *ngIf="chartDone"
+            [Highcharts]="Highcharts"
+            [options]="chartOptions"
+            [constructorType]="'stockChart'"
+        ></highcharts-chart>
+    </div>
+<div> 

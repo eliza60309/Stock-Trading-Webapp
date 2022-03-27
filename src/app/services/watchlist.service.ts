@@ -18,7 +18,7 @@ export class WatchlistService {
   }
 
   check(target: string): boolean {
-    return WatchlistService.watchlist.findIndex((value) => value == target) != null;
+    return WatchlistService.watchlist.findIndex((value) => value == target) != -1;
   }
 
   remove(target: string) {
@@ -27,7 +27,7 @@ export class WatchlistService {
   }
 
   updateWatchlist(method: string, target: string) {
-    localStorage.setItem('watchlist', JSON.stringify(WatchlistService.watchlist));
+    localStorage.setItem("watchlist", JSON.stringify(WatchlistService.watchlist));
     WatchlistService.tunnel.next(method + "<partitionerYAYA>" + target);
   }
 

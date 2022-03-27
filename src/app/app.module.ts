@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular'
 
 
@@ -30,6 +30,10 @@ import { MainService } from './services/main.service';
 import { UrlService } from './services/url.service';
 import { WatchlistService } from './services/watchlist.service';
 import { ProfileService } from './services/profile.service';
+import { PortfolioService } from './services/portfolio.service';
+import { TradeService } from './services/trade.service';
+import { BuyWindowComponent } from './services/modals/buy-window/buy-window.component';
+import { SellWindowComponent } from './services/modals/sell-window/sell-window.component';
 
 
 @NgModule({
@@ -49,7 +53,9 @@ import { ProfileService } from './services/profile.service';
     SummaryComponent,
     TopNewsComponent,
     ChartsComponent,
-    InsightComponent
+    InsightComponent,
+    BuyWindowComponent,
+    SellWindowComponent
   ],
   imports: [
     HighchartsChartModule,
@@ -66,7 +72,9 @@ import { ProfileService } from './services/profile.service';
     MainService,
     UrlService,
     WatchlistService,
-    ProfileService
+    ProfileService,
+    PortfolioService,
+    TradeService
   ],
   bootstrap: [AppComponent]
 })

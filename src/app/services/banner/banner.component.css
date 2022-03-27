@@ -3,17 +3,87 @@
 }
 
 [name="left"], [name="right"] {
+    vertical-align: top;
     width: 40%;
 }
 
-[name="center"] {
+[name="middle"] {
+    text-align: center;
+    vertical-align: top;
     width: 20%;
 }
 
+[name="right"] {
+    text-align: right;
+}
+
 #title {
+    display: inline-block;
     font-size: 40px;
+    margin: 10px;
+}
+
+#company_name {
+    font-size: 20px;
+    color: grey;
+    margin: 10px;
+}
+
+#exchange {
+    margin: 10px;
+}
+
+[name="stars"] {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#followed {
+    color: yellow;
+}
+
+#logo {
+    vertical-align: top;
+    width: 60%;
+}
+
+#market {
+    width: 100%;
+    text-align: center;
+}
+
+#closemsg {
+    font-weight: bold;
+    color: red;
+}
+
+#openmsg {
+    font-weight: bold;
+    color: green;
 }
 
 .root {
     height: 200px;
+}
+
+button {
+    margin: 5px;
+}
+
+#price {
+    font-size: 35px;
+    margin: 10px;
+}
+
+#change {
+    font-size: 25px;
+    margin: 10px;
+}
+
+#time {
+    margin: 10px;
+}
+
+#stockup, #stockdown {
+    display: inline-block;
 }

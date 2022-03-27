@@ -14,7 +14,6 @@ export class TopNewsComponent implements OnInit {
     console.log(UrlService.url);
     this.urlService.listener$.subscribe((url: string) => {
       this.startWorking(url);
-      console.log("news get url");
     });
   }
 

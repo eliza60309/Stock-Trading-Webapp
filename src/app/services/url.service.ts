@@ -11,7 +11,9 @@ export class UrlService {
   
 
   updateUrl(url: string) {
+    console.log("URL:" + url);
     UrlService.url = url;
-    UrlService.tunnel.next(url);
+    if(url != "home")
+      UrlService.tunnel.next(url);
   }
 }

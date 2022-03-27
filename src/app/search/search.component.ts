@@ -9,7 +9,7 @@ import { UrlService } from '../services/url.service';
 })
 export class SearchComponent implements OnInit {
   
-  text :string = ""; 
+  text: string = ""; 
   control = new FormControl('');
 
   @Output() cancelEvent: EventEmitter<null> = new EventEmitter();

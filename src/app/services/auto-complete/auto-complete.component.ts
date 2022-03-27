@@ -15,6 +15,10 @@ export class AutoCompleteComponent implements OnInit {
   constructor(private mainService: MainService, public urlService: UrlService) { }
   
   ngOnInit(): void { }
+
+  clicked() {
+    this.list = [];
+  }
   
   get(stock_id :string) {
     if(stock_id == "") {

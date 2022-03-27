@@ -9,7 +9,7 @@
         </span>
         <span *ngIf="!isLoading" >
             <li *ngFor="let item of list">
-                <button [routerLink]="'/search/' + item.displaySymbol" (click)="this.urlService.updateUrl(item.displaySymbol)">
+                <button [routerLink]="'/search/' + item.displaySymbol" (click)="this.urlService.updateUrl(item.displaySymbol); clicked()">
                     {{item.displaySymbol}} | {{item.description}}
                 </button>
             </li>

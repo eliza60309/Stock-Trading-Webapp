@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MainService } from '../../main.service';
-import { Chart } from 'angular-highcharts';
+import * as Highcharts from "highcharts/highstock";
 import { UrlService } from '../../url.service';
+import { ProfileService } from '../../profile.service';
+import { TradeService } from '../../trade.service';
 
 @Component({
   selector: 'app-summary',
@@ -22,12 +24,19 @@ export class SummaryComponent implements OnInit {
   industry: string = "";
   webpage: string = "";
   peers: Array<string> = [];
-  chart: Chart = new Chart();
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options = { };
+  chartData: Array<any> = [];
+  chartDone:boolean = false;
 
-  constructor(private mainService: MainService, private urlService: UrlService) {
+  constructor(private mainService: MainService, public urlService: UrlService, private profileService: ProfileService) {
     this.urlService.listener$.subscribe((url: string) => {
       this.stock_id = url;
       this.update();
+    });
+    this.profileService.listener2.subscribe((color: boolean) => {
+      this.colorGreen = color;
+      this.setChartOption();
     });
   }
   ngOnInit(): void { }
@@ -36,7 +45,7 @@ export class SummaryComponent implements OnInit {
     this.updateQuote();
     this.updateQuery();
     this.updatePeer();
-    this.updateChart();
+    //this.updateChart();
   }
 
   round(num: number): number {
@@ -55,6 +64,7 @@ export class SummaryComponent implements OnInit {
         this.o = this.round(data.body.o);
         this.pc = this.round(data.body.pc);
         this.t = this.round(data.body.t);
+        this.updateChart();
       }
     });
   }
@@ -94,13 +104,26 @@ export class SummaryComponent implements OnInit {
       {key: "TO", value: String(this.t)}]
     )
     .subscribe(data => {
+      console.log(data);
       if(data.body && data.body.o) {
-        this.chart = new Chart({
-          plotOptions: { line: { marker: { enabled: false }, color: (this.colorGreen? '#00FF00': '#FF0000') } },
-          series: [{ data: data.body.o, type: 'line'}],
-          legend: { enabled: false },
-        });
+        this.chartData = [];
+        for(let i = 0; i < data.body.o.length; i++){
+          this.chartData.push([data.body.t[i] * 1000, data.body.o[i]]);
+        }
+        this.setChartOption();
       }
     });
+  }
+  
+  setChartOption() {
+    this.chartOptions = {
+      title: { text: this.stock_id + " Hourly Price Variation", style: { color: 'grey' } },
+      rangeSelector: { enabled: false },
+      navigator: { enabled: false }, 
+      plotOptions: { line: { marker: { enabled: false }, color: (this.colorGreen? '#00FF00': '#FF0000') } },
+      series: [{ data: this.chartData!, type: 'line', name: this.stock_id }],
+      legend: { enabled: false },
+    }
+    this.chartDone = true;
   }
 }

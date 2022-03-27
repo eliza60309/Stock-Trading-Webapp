@@ -55,6 +55,11 @@ export class ProfileComponent implements OnInit {
     this.error = false;
     this.loading = false;
   }
+
+  resetURL() {
+    this.urlService.updateUrl("home");
+    this.reset();
+  }
   /*
   startWorking(url: string) {
     if(url != "" && url != "home") {
