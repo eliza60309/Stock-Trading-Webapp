@@ -55,7 +55,7 @@ import { SellWindowComponent } from './services/modals/sell-window/sell-window.c
     ChartsComponent,
     InsightComponent,
     BuyWindowComponent,
-    SellWindowComponent
+    SellWindowComponent,
   ],
   imports: [
     HighchartsChartModule,

@@ -9,7 +9,7 @@
             Money in Wallet: ${{cash}}<br>
             Quantity: <input class="form-control" type="number" (input)="verifyQuant()" [formControl]="control" [(ngModel)]="quant">
         </div>
-        <div class="red" *ngIf="!enabled">
+        <div class="red" *ngIf="msg">
             You cannot sell the stocks that you don't have!
         </div>
     </form>

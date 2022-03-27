@@ -18,7 +18,9 @@ export class BuyWindowComponent implements OnInit {
   stock_id: string = "";
   price: number = 0;
   quant: number = 0;
-  enabled: boolean = true;
+  enabled: boolean = false;
+  msg: boolean = false;
+
   constructor(public activeModal: NgbActiveModal, private portfolioService: PortfolioService) { 
     this.cash = PortfolioService.cash.amount;
     this.stock_id = TradeService.stock_id;
@@ -28,10 +30,17 @@ export class BuyWindowComponent implements OnInit {
   ngOnInit(): void { }
 
   verifyQuant() {
-    if(this.price * this.quant > this.cash)
+    if(this.price * this.quant > this.cash || this.quant == 0) {
+      this.msg = true;
       this.enabled = false;
-    else
-      this.enabled = true;
+    }
+    else {
+      this.msg = false;
+      if(this.quant == 0)
+        this.enabled = false;
+      else
+        this.enabled = true;
+    }
   }
 
   buy() {

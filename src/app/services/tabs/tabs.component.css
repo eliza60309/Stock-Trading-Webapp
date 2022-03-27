@@ -1,0 +1,28 @@
+.text {
+    color: dimgrey;
+    font-weight: bold;
+}
+
+a.active {
+    border-bottom: solid;
+    border-color: rgb(30,32,161);
+
+}
+
+a.active:hover {
+    border-bottom: solid;
+    border-color: rgb(30,32,161);
+    background-color: white;
+
+}
+
+a:hover {
+    border: none;
+    background-color: lightgrey;
+}
+
+li {
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: grey;
+}

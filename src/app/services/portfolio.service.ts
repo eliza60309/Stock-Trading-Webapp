@@ -6,7 +6,7 @@ export class PortfolioService {
   static portfolio: Array<any> = [];
   static cash: any;
   private static tunnel = new Subject<string>();
-  //private static tunnel2 = new Subject<string>();
+  listener$ = PortfolioService.tunnel.asObservable();
   constructor() {
       if(localStorage.getItem("portfolio"))
       PortfolioService.portfolio = JSON.parse(localStorage.getItem("portfolio")!);
@@ -16,7 +16,6 @@ export class PortfolioService {
     PortfolioService.cash = {"amount": 25000};
     this.updatePortfolio("construct", "");
   }
-  listener$ = PortfolioService.tunnel.asObservable();
 
   findStock(target: string) {
     return PortfolioService.portfolio.findIndex((value) => {

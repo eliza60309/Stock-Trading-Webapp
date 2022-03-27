@@ -13,9 +13,16 @@ import { WatchlistService } from '../watchlist.service';
 })
 export class BannerComponent implements OnInit {
 
+
   //@Output() emitNoDataEvent: EventEmitter<null> = new EventEmitter<null>();
   //@Output() emitCompleteEvent: EventEmitter<null> = new EventEmitter<null>();
   //@Output() emitColorEvent: EventEmitter<boolean> =  new EventEmitter<boolean>();
+  MSGTIMEOUT: number = 2000;//ms
+
+  followMsg: boolean = false;
+  unfollowMsg: boolean = false;
+  buyMsg: boolean = false;
+  sellMsg: boolean = false;
   emitted: boolean = false;
   hide: boolean = true;
   hidebtn: boolean = true;
@@ -54,11 +61,36 @@ export class BannerComponent implements OnInit {
       this.updateQuant();
     });
     this.profileService.listener2.subscribe((color: boolean) => this.color = color);
-    this.portfolioService.listener$.subscribe((msg: string) => this.updateQuant());
+    this.portfolioService.listener$.subscribe((msg: string) => {
+      this.msgEvent(msg);
+      this.updateQuant();
+    });
   }
   
   ngOnInit(): void { }
 
+  msgEvent(msg: string) {
+    console.log(msg.split("<partitionerYAYA>"));
+    if(msg.split("<partitionerYAYA>")[0] == "buy") {
+      this.buyMsg = true;
+      setTimeout(() => this.buyMsg = false, this.MSGTIMEOUT);
+    }
+    else if(msg.split("<partitionerYAYA>")[0] == "sell") {
+      this.sellMsg = true;
+      setTimeout(() => this.sellMsg = false, this.MSGTIMEOUT);
+    }
+  }
+
+  followEventMsg(follow: boolean) {
+    if(follow) {
+      this.followMsg = true;
+      setTimeout(() => this.followMsg = false, this.MSGTIMEOUT);
+    }
+    else {
+      this.unfollowMsg = true;
+      setTimeout(() => this.unfollowMsg = false, this.MSGTIMEOUT);
+    }
+  }
 
   updateQuant() {
     if(this.portfolioService.countStock(this.stock_id) == 0)

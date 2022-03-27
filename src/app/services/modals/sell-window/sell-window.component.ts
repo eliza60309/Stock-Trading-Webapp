@@ -16,7 +16,8 @@ export class SellWindowComponent implements OnInit {
   stock_id: string = "";
   price: number = 0;
   quant: number = 0;
-  enabled: boolean = true;
+  enabled: boolean = false;
+  msg: boolean = false;
   total: number = 0;
   constructor(public activeModal: NgbActiveModal, private portfolioService: PortfolioService) { 
     this.cash = PortfolioService.cash.amount;
@@ -28,10 +29,17 @@ export class SellWindowComponent implements OnInit {
 
   verifyQuant() {
     this.total = this.quant * this.price;
-    if(this.quant > this.portfolioService.countStock(this.stock_id)) 
+    if(this.quant > this.portfolioService.countStock(this.stock_id)) {
+      this.msg = true;
       this.enabled = false;
-    else
-      this.enabled = true;
+    }
+    else {
+      this.msg = false;
+      if(this.quant == 0)
+        this.enabled = false;
+      else
+        this.enabled = true;
+    }
   }
 
   sell() {

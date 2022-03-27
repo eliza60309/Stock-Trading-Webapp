@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UrlService } from '../../url.service';
 import { MainService } from '../../main.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-top-news',
@@ -10,7 +11,8 @@ import { MainService } from '../../main.service';
 export class TopNewsComponent implements OnInit {
   list: Array<any> = [];
   stock_id: string = "";
-  constructor(private mainService: MainService, private urlService: UrlService) {
+  target: any = {source: "", time: new Date(), headline: "", summary: "", url: ""};
+  constructor(private mainService: MainService, private urlService: UrlService, private modalService: NgbModal) {
     console.log(UrlService.url);
     this.urlService.listener$.subscribe((url: string) => {
       this.startWorking(url);
@@ -19,6 +21,19 @@ export class TopNewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.startWorking(UrlService.url);
+  }
+
+  encode(str: string) {
+    return encodeURIComponent(str);
+  }
+
+  record(item: any, content: any) {
+    this.target.source = item.source;
+    this.target.time = new Date(item.datetime * 1000);
+    this.target.headline = item.headline;
+    this.target.summary = item.summary;
+    this.target.url = item.url;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
   }
 
   startWorking(url: string) {
@@ -37,7 +52,7 @@ export class TopNewsComponent implements OnInit {
     .subscribe(data => {
       if(data.body && data.body.length > 0) {
         this.list = data.body;
-        console.log("DONE");
+        console.log(data.body);
       }
     });
   }
