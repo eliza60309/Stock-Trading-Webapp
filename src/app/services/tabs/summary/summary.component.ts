@@ -104,7 +104,6 @@ export class SummaryComponent implements OnInit {
       {key: "TO", value: String(this.t)}]
     )
     .subscribe(data => {
-      console.log(data);
       if(data.body && data.body.o) {
         this.chartData = [];
         for(let i = 0; i < data.body.o.length; i++){

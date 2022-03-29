@@ -1,4 +1,61 @@
-<p>portfolio works!</p>
-Cons:{{cons}}<br>
-Init:{{init}}<br>
-Elapsed:{{elapsed}}
+<div class="container">
+    <div class="title">My Portfolio</div>
+    <div class="subtitle">Money in wallet: ${{cash}}</div>
+    <ngb-alert *ngIf="buyMsg" type="success" (closed)="buyMsg = false">{{stock_id}} bought successfully</ngb-alert>
+    <ngb-alert *ngIf="sellMsg" type="danger"(closed)="sellMsg = false">{{stock_id}} sold successfully</ngb-alert>
+    <ngb-alert *ngIf="entrylist.length == 0" [dismissible]="false">Currently you don't have any stock.</ngb-alert>
+    <li *ngFor="let item of entrylist">
+        <div class="card">
+            <div class="card-header">
+                <div class="header-title">
+                    {{item.stock_id}}
+                </div>
+                <div class="header-subtitle">
+                    {{item.name}}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Quantity:</td>
+                                <td class="align-right">{{item.unit}}</td>
+                                <td>Change:</td>
+                                <td class="align-right" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">
+                                    <div id="stockup" *ngIf="round(item.c) > round(item.price)" style="display: inline;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                            <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div id="stockdown" *ngIf="round(item.c) < round(item.price)" style="display: inline;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                        </svg>
+                                    </div>
+                                    {{round(item.c) - round(item.price)}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Avg. Cost / Share:</td>
+                                <td class="align-right">{{round(item.price)}}</td>
+                                <td>Current Price:</td>
+                                <td class="align-right" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">{{round(item.c)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Cost:</td>
+                                <td class="align-right">{{round(item.unit) * round(item.price)}}</td>
+                                <td>Market Value:</td>
+                                <td class="align-right" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">{{round(item.c) * round(item.unit)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="buyButton(item.stock_id, item.price)">Buy</button>
+                <button type="button" class="btn btn-danger" (click)="sellButton(item.stock_id, item.price)">Sell</button>
+            </div>
+        </div>
+    </li>
+</div>

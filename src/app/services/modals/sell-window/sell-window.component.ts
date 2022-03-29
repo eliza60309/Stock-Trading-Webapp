@@ -28,6 +28,11 @@ export class SellWindowComponent implements OnInit {
   ngOnInit(): void { }
 
   verifyQuant() {
+    if(this.quant < 0) {
+      this.msg = false;
+      this.enabled = false;
+      return;
+    }
     this.total = this.quant * this.price;
     if(this.quant > this.portfolioService.countStock(this.stock_id)) {
       this.msg = true;

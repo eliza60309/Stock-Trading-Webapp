@@ -1,12 +1,7 @@
-<p>charts Works!</p>
-
-<!--
-<div [chart]="chart"></div>
--->
 <highcharts-chart 
    *ngIf="update"
   [Highcharts]="Highcharts"
   [options]="chartOptions"
   [constructorType]="'stockChart'" 
-  style="width: 100%; height: 500px; display: block;"
+  style="width: 100%; height: 800px; display: block;"
 ></highcharts-chart>

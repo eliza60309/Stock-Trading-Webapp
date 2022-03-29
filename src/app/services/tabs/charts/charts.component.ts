@@ -45,7 +45,6 @@ export class ChartsComponent implements OnInit {
 
   setChartData(data: any) {
     let dataLength = data.o.length;
-    console.log(data.o.length);
     let ohlc = [];
     let volume = [];
     for (let i = 0; i < dataLength; i++) {
@@ -59,9 +58,7 @@ export class ChartsComponent implements OnInit {
       rangeSelector:{ selected: 2 },
       title: { text: stock_id + ' Historical' },
       subtitle: { text: 'With SMA and Volume by Price technical indicators' },
-      yAxis: [{ 
-        //startOnTick: false, 
-        //endOnTick: false, 
+      yAxis: [{
         labels: { align: 'right', x: -3 },
         title: { text: 'OHLC' },
         height: '60%',

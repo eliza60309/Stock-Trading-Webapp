@@ -13,10 +13,6 @@ import { WatchlistService } from '../watchlist.service';
 })
 export class BannerComponent implements OnInit {
 
-
-  //@Output() emitNoDataEvent: EventEmitter<null> = new EventEmitter<null>();
-  //@Output() emitCompleteEvent: EventEmitter<null> = new EventEmitter<null>();
-  //@Output() emitColorEvent: EventEmitter<boolean> =  new EventEmitter<boolean>();
   MSGTIMEOUT: number = 2000;//ms
 
   followMsg: boolean = false;
@@ -65,12 +61,16 @@ export class BannerComponent implements OnInit {
       this.msgEvent(msg);
       this.updateQuant();
     });
+    this.watchlistService.listener.subscribe((url: string) => this.msgFollow(url));
   }
   
   ngOnInit(): void { }
 
+  msgFollow(msg:string) {
+    this.follow = this.watchlistService.check(this.stock_id);
+  }
+
   msgEvent(msg: string) {
-    console.log(msg.split("<partitionerYAYA>"));
     if(msg.split("<partitionerYAYA>")[0] == "buy") {
       this.buyMsg = true;
       setTimeout(() => this.buyMsg = false, this.MSGTIMEOUT);
@@ -141,7 +141,6 @@ export class BannerComponent implements OnInit {
       }
       else
         this.failed();
-//        this.emitNoDataEvent.emit();
     });
   }
 

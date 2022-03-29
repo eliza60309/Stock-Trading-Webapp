@@ -13,14 +13,16 @@ export class TopNewsComponent implements OnInit {
   stock_id: string = "";
   target: any = {source: "", time: new Date(), headline: "", summary: "", url: ""};
   constructor(private mainService: MainService, private urlService: UrlService, private modalService: NgbModal) {
-    console.log(UrlService.url);
     this.urlService.listener$.subscribe((url: string) => {
-      this.startWorking(url);
+        
+      this.stock_id = url;
+      this.updateNews();
+      //this.startWorking(url);
     });
   }
 
   ngOnInit(): void {
-    this.startWorking(UrlService.url);
+    //this.startWorking(UrlService.url);
   }
 
   encode(str: string) {
@@ -51,8 +53,12 @@ export class TopNewsComponent implements OnInit {
     )
     .subscribe(data => {
       if(data.body && data.body.length > 0) {
-        this.list = data.body;
-        console.log(data.body);
+        this.list = data.body.filter((value: any) => {
+          if(value.image == "")
+            return false;
+          else
+            return true;
+        });
       }
     });
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/services/main.service';
+import { RoutingService } from 'src/app/services/routing.service';
+import { UrlService } from 'src/app/services/url.service';
 import { WatchlistService } from 'src/app/services/watchlist.service';
 
 @Component({
@@ -9,14 +11,55 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
 })
 export class WatchlistComponent implements OnInit {
 
+  INTERVAL: number = 15000;
   watchlist: Array<string> = [];
-  constructor(private mainService: MainService, private watchlistService: WatchlistService) {
-      this.watchlist = WatchlistService.watchlist;
-      this.watchlistService.listener.subscribe((url: string) => {
-      this.watchlist = WatchlistService.watchlist;
-    });
-  }
-  ngOnInit(): void {
+  entrylist: Array<any> = [];
+  color: number = 0;
+  interval: any = null;
+  constructor(private mainService: MainService, public watchlistService: WatchlistService, public urlService: UrlService, public routingService: RoutingService) {
+    setTimeout(() => this.updateList(), 500);
+    this.watchlistService.listener.subscribe((url: string) => { this.updateList() });
   }
 
+  updateList() {
+    this.entrylist = [];
+    this.watchlist = WatchlistService.watchlist;
+    for(let i = 0; i < this.watchlist.length; i++) {
+      this.entrylist.push({stock_id: this.watchlist[i], price: {c: 0, d: 0, dp: 0}, name: ""});
+      this.getName(i, this.watchlist[i]);
+      this.getQuote(i, this.watchlist[i]);
+      clearInterval(this.interval);
+      this.interval = setInterval(() => {
+        for(let i = 0; i < this.watchlist.length; i++) {
+            this.getQuote(i, this.watchlist[i]);
+        }
+      }, this.INTERVAL);
+    }
+  }
+
+  ngOnInit(): void { }
+
+  getName(entry: number, stock_id: string) {
+    this.mainService.get("query", [{key: "STOCK_ID", value: stock_id}])
+    .subscribe(data => {
+      if(data.body && Object.keys(data.body).length != 0) {
+        this.entrylist[entry].name = data.body.name;
+      }
+    });
+  }
+
+  getQuote(entry: number, stock_id: string) {
+    this.mainService.get("quote", [{key: "STOCK_ID", value: stock_id}])
+    .subscribe((data: any) => {
+      if(data.body && Object.keys(data.body).length != 0 && data.body.d != null && data.body.dp != null) {
+        this.entrylist[entry].price.c = this.round(data.body.c);
+        this.entrylist[entry].price.d = this.round(data.body.d);
+        this.entrylist[entry].price.dp = this.round(data.body.dp);
+      }
+    });
+  }
+
+  round(num: number): number {
+    return Math.round(num * 100) / 100;
+  }
 }

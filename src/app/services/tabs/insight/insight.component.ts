@@ -27,11 +27,13 @@ export class InsightComponent implements OnInit {
   reddit_total: number = 0;
   reddit_pos: number = 0;
   reddit_neg: number = 0;
+  FUCKING_COMPANY_NAME: string = "";
   constructor(private mainService: MainService, private urlService: UrlService) {
     this.urlService.listener$.subscribe((url: string) => {
       this.getTrend();
       this.getRecommendation();
       this.getEarnings();
+      this.getQuery();
     });
   }
 
@@ -69,6 +71,18 @@ export class InsightComponent implements OnInit {
     .subscribe(data => {
       if(data.body && data.body.length > 0) {
         this.digestEarnings(data.body);
+      }
+    });
+  }
+
+  getQuery() {
+    this.mainService.get(
+      "query",
+      [{key: "STOCK_ID", value: UrlService.url}]
+    )
+    .subscribe(data => {
+      if(data.body && Object.keys(data.body).length != 0) {
+        this.FUCKING_COMPANY_NAME = data.body.name;
       }
     });
   }

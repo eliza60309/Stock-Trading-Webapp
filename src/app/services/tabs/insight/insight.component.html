@@ -1,19 +1,50 @@
-<p>insight works!</p>
-Twitter: {{twitter_total}}<br>
-{{twitter_pos}}<br>
-{{twitter_neg}}<br>
-Reddit: {{reddit_total}}<br>
-{{reddit_pos}}<br>
-{{reddit_neg}}<br>
+<div>
+    <div class="title">Social Sentiments</div>
+    <table class="table" style="border-top: none;">
+        <thead>
+          <tr class="table-active">
+            <th scope="col">{{FUCKING_COMPANY_NAME}}</th>
+            <th scope="col">Reddit</th>
+            <th scope="col">Twitter</th>
+          </tr>
+        </thead>
+        <tbody style="border-top: none;">
+          <tr>
+            <th scope="row" class="table-active">Total Mentions</th>
+            <td>{{reddit_total}}</td>
+            <td>{{twitter_total}}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-active">Positive Mentions</th>
+            <td>{{reddit_pos}}</td>
+            <td>{{twitter_pos}}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-active">Negative Mentions</th>
+            <td>{{reddit_neg}}</td>
+            <td>{{twitter_neg}}</td>
+          </tr>
+        </tbody>
+      </table>
+<!--
+    Twitter: {{twitter_total}}<br>
+    {{twitter_pos}}<br>
+    {{twitter_neg}}<br>
+    Reddit: {{reddit_total}}<br>
+    {{reddit_pos}}<br>
+    {{reddit_neg}}<br>
+-->
+</div>
+
 <highcharts-chart
     *ngIf="update1"
     [Highcharts]="Highcharts1" 
-    [options]="chartOptions1">
+    [options]="chartOptions1"
+    class="charts">
 </highcharts-chart>
 <highcharts-chart
     *ngIf="update2"
     [Highcharts]="Highcharts2" 
-    [options]="chartOptions2">
+    [options]="chartOptions2"
+    class="charts">
 </highcharts-chart>
-123
-<!--[constructorType]="'stockChart'"-->

@@ -1,0 +1,50 @@
+.title {
+    font-size: 30px;
+    padding: 20px;
+}
+
+li {
+    padding: 20px;
+    list-style-type: none;
+}
+
+.entry {
+    background-color: white;
+    padding: 20px;
+    border: solid lightgrey 1px;
+    height: 100px;
+}
+
+.entry-title {
+    font-size: 30px;
+    padding: 5px;
+}
+
+.entry-subtitle {
+    font-size: 15px;
+    padding: 5px;
+}
+
+.left {
+    width: 30%;
+    float: left;
+}
+
+.right {
+    width: 30%;
+    float: right;
+}
+
+.nums {
+    text-align: right;
+}
+
+.btn-close {
+    top: -10px;
+    right: -10px;
+    float: right;
+}
+
+.ngb-alert {
+    text-align: center;
+}

@@ -7,15 +7,15 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul ngbNav [animation]="false" [(activeId)]="activeId" class="navbar-nav fr" #nav="ngbNav">
         <li class="nav-item" [ngbNavItem]="1" [destroyOnHide]="false">
-          <a class="nav-link text" [routerLink]="'/search/' + getUrl()" [class]="getClass(1)" (click)="activate(1)" ngbNavLink>Search</a>
+          <a class="nav-link text" [routerLink]="'/search/' + getUrl()" [class]="activated == 1? 'active': ''" (click)="activate(1)" ngbNavLink>Search</a>
           <ng-template ngbNavContent><app-profile></app-profile></ng-template>
         </li>
         <li class="nav-item" [ngbNavItem]="2" [destroyOnHide]="false">
-          <a class="nav-link text" [routerLink]="'/watchlist'" [class]="getClass(2)" (click)="activate(2)" ngbNavLink>Watchlist</a>
+          <a class="nav-link text" [routerLink]="'/watchlist'" [class]="activated == 2? 'active': ''" (click)="activate(2)" ngbNavLink>Watchlist</a>
           <ng-template ngbNavContent><app-watchlist></app-watchlist></ng-template>
         </li>
         <li class="nav-item" [ngbNavItem]="3" [destroyOnHide]="false">
-          <a class="nav-link text" [routerLink]="'/portfolio'" [class]="getClass(3)" (click)="activate(3)" ngbNavLink>Portfolio</a>
+          <a class="nav-link text" [routerLink]="'/portfolio'" [class]="activated == 3? 'active': ''" (click)="activate(3)" ngbNavLink>Portfolio</a>
           <ng-template ngbNavContent><app-portfolio></app-portfolio></ng-template>
         </li>
       </ul>
