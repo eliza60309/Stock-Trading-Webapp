@@ -50,21 +50,35 @@ li {
 button {
     margin: 5px;
 }
-
+.data.align-right {
+    width: 30%;
+}
+.data {
+    width: 70%;
+}
+.block {
+    display: inline-block;
+}
 @media (min-width: 500px) {
-    .data.align-right {
+    /*.data.align-right {
         width: 15%;
     }
     .data {
         width: 35%;
+    }*/
+    .block {
+        width: 50%;
     }
 }
 
 @media (max-width: 499px) {
-    .data.align-right {
+    /*.data.align-right {
         width: 30%;
     }
     .data {
         width: 70%;
+    }*/
+    .block {
+        width: 100%;
     }
 }
