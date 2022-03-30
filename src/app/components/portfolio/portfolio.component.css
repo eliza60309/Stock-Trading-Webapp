@@ -8,7 +8,7 @@
     padding: 20px;
 }
 
-.ngb-alert {
+ngb-alert {
     text-align: center;
 }
 
@@ -36,10 +36,11 @@ li {
     text-align: right;
 }
 
-td {
+.data {
     font-size: 20px;
     padding: 5px;
     border: 0px;
+    display: inline-block;
 }
 
 .card-footer {
@@ -48,4 +49,22 @@ td {
 
 button {
     margin: 5px;
+}
+
+@media (min-width: 500px) {
+    .data.align-right {
+        width: 15%;
+    }
+    .data {
+        width: 35%;
+    }
+}
+
+@media (max-width: 499px) {
+    .data.align-right {
+        width: 30%;
+    }
+    .data {
+        width: 70%;
+    }
 }

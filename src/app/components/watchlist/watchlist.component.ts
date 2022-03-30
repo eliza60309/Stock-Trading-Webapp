@@ -10,15 +10,33 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-
+  MSGTIMEOUT: number = 2000;//ms
   INTERVAL: number = 15000;
   watchlist: Array<string> = [];
   entrylist: Array<any> = [];
   color: number = 0;
   interval: any = null;
+  followMsg: boolean = false;
+  unfollowMsg: boolean = false;
+  stock_id: string = "";
   constructor(private mainService: MainService, public watchlistService: WatchlistService, public urlService: UrlService, public routingService: RoutingService) {
     setTimeout(() => this.updateList(), 500);
-    this.watchlistService.listener.subscribe((url: string) => { this.updateList() });
+    this.watchlistService.listener.subscribe((msg: string) => {
+      this.followEventMsg(msg);
+      this.updateList()
+    });
+  }
+
+  followEventMsg(msg: string) {
+    if(msg.split("<partitionerYAYA>")[0] == "add") {
+      this.followMsg = true;
+      setTimeout(() => this.followMsg = false, this.MSGTIMEOUT);
+    }
+    else {
+      this.unfollowMsg = true;
+      setTimeout(() => this.unfollowMsg = false, this.MSGTIMEOUT);
+    }
+    this.stock_id = msg.split("<partitionerYAYA>")[1];
   }
 
   updateList() {

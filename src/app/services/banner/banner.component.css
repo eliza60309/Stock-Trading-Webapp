@@ -63,7 +63,7 @@
 }
 
 .root {
-    height: 200px;
+    height: 250px;
 }
 
 button {
@@ -86,4 +86,22 @@ button {
 
 #stockup, #stockdown {
     display: inline-block;
+}
+
+@media (max-width: 499px) {
+    #title {
+        font-size: 30px;
+    }
+    
+    #company_name {
+        font-size: 15px;
+    }
+
+    #price {
+        font-size: 20px;
+    }
+    
+    #change {
+        font-size: 15px;
+    }
 }

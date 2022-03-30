@@ -28,6 +28,10 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  ispc() {
+    return window.screen.width >= 300;
+  }
+
   updateList() {
     this.entrylist = [];
     this.list = PortfolioService.portfolio;

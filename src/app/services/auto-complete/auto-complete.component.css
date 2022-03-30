@@ -1,16 +1,16 @@
 ul {
     margin: auto;
     list-style-type: none;
-    width: 30%;
-    min-width: 400px;
+    width: 40%;
+    min-width: 300px;
     padding: 0px;
 }
 
 button {
+    text-align: left;
     margin: auto;
     width: 80%;
-    min-width: 320px;
-    line-height: 40px;
+    height: 50px;
     background-color: white;
     box-shadow: 0 3px 7px grey;
     border: none;
@@ -26,4 +26,9 @@ mat-spinner {
 
 span {
     width: 100%;
+}
+
+.stock {
+    font-size: 15px;
+    display: inline-block;
 }

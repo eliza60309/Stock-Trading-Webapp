@@ -3,7 +3,6 @@ import { MainService } from '../../main.service';
 import * as Highcharts from "highcharts/highstock";
 import { UrlService } from '../../url.service';
 import { ProfileService } from '../../profile.service';
-import { TradeService } from '../../trade.service';
 
 @Component({
   selector: 'app-summary',
@@ -12,7 +11,6 @@ import { TradeService } from '../../trade.service';
 })
 export class SummaryComponent implements OnInit {
 
-  //@Input() stock_id: string = "";
   @Input() colorGreen: boolean = true;
   stock_id: string = "";
   h: number = 0;
@@ -45,7 +43,6 @@ export class SummaryComponent implements OnInit {
     this.updateQuote();
     this.updateQuery();
     this.updatePeer();
-    //this.updateChart();
   }
 
   round(num: number): number {
@@ -116,6 +113,7 @@ export class SummaryComponent implements OnInit {
   
   setChartOption() {
     this.chartOptions = {
+      chart: {height: '70%'},
       title: { text: this.stock_id + " Hourly Price Variation", style: { color: 'grey' } },
       rangeSelector: { enabled: false },
       navigator: { enabled: false }, 

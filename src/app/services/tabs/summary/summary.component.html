@@ -28,7 +28,9 @@
             <b>Industry:</b>&nbsp;{{industry}}<br>
             <b>Webpage:</b>&nbsp;<a href="{{webpage}}" target="_blank" rel="noopener noreferer">{{webpage}}</a><br>
             <b>Company Peers:</b><br>
-            <a class="links" *ngFor="let item of peers" [routerLink]="'/search/' + item" (click)="this.urlService.updateUrl(item)">{{item}},&nbsp;</a>
+            <div *ngFor="let item of peers" style="display: inline-block;">
+                <a class="links"  [routerLink]="'/search/' + item" (click)="this.urlService.updateUrl(item)">{{item}},&nbsp;</a>
+            </div>
         </div>
     </div>
     <div id="right">
@@ -37,6 +39,7 @@
             [Highcharts]="Highcharts"
             [options]="chartOptions"
             [constructorType]="'stockChart'"
+            style="margin: auto;"
         ></highcharts-chart>
     </div>
 <div> 

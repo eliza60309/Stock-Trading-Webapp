@@ -5,9 +5,9 @@
       &#9776;
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-      <ul ngbNav [animation]="false" [(activeId)]="activeId" class="navbar-nav fr" #nav="ngbNav">
+      <ul ngbNav [animation]="false" [(activeId)]="activeId" class="navbar-nav" #nav="ngbNav">
         <li class="nav-item" [ngbNavItem]="1" [destroyOnHide]="false">
-          <a class="nav-link text" [routerLink]="'/search/' + getUrl()" [class]="activated == 1? 'active': ''" (click)="activate(1)" ngbNavLink>Search</a>
+          <a style="width: 100%;" class="nav-link text" [routerLink]="'/search/' + getUrl()" [class]="activated == 1? 'active': ''" (click)="activate(1)" ngbNavLink>Search</a>
           <ng-template ngbNavContent><app-profile></app-profile></ng-template>
         </li>
         <li class="nav-item" [ngbNavItem]="2" [destroyOnHide]="false">

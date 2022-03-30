@@ -64,9 +64,26 @@ img.v-align {
 }
 
 .modal-body {
-    height: 350px;
+    min-height: 350px;
+    /*height: 900px;*/
 }
 
 .content-data {
-    height: 200px;
+    min-height: 200px;
+}
+
+@media (max-width: 499px) {
+    .entry {
+        width: 96%;
+        height: 250px;
+    }
+    img.v-align {
+        height: 150px;
+        width: 100%;
+        vertical-align: top;
+        margin-top: 10px;
+    }
+    .headline {
+        vertical-align: top;
+    }
 }

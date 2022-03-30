@@ -30,7 +30,12 @@ export class BuyWindowComponent implements OnInit {
   ngOnInit(): void { }
 
   verifyQuant() {
-    if(this.price * this.quant > this.cash || this.quant == 0) {
+    if(this.quant < 0) {
+      this.msg = false;
+      this.enabled = false;
+      return;
+    }
+    if(this.price * this.quant > this.cash) {
       this.msg = true;
       this.enabled = false;
     }

@@ -1,4 +1,4 @@
-<div class="root">
+<div class="">
     <ul>
         <span>
             <li *ngIf="isLoading">
@@ -10,7 +10,7 @@
         <span *ngIf="!isLoading" >
             <li *ngFor="let item of list">
                 <button [routerLink]="'/search/' + item.displaySymbol" (click)="this.urlService.updateUrl(item.displaySymbol); clicked()">
-                    {{item.displaySymbol}} | {{item.description}}
+                    <div class="stock">{{item.displaySymbol}}</div> | {{item.description}}
                 </button>
             </li>
         </span>

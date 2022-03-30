@@ -18,20 +18,22 @@ li {
 .entry-title {
     font-size: 30px;
     padding: 5px;
+    width: 100%;
 }
 
 .entry-subtitle {
     font-size: 15px;
     padding: 5px;
+    width: 100%;
 }
 
 .left {
-    width: 30%;
+    width: 45%;
     float: left;
 }
 
 .right {
-    width: 30%;
+    width: 45%;
     float: right;
 }
 
@@ -40,11 +42,22 @@ li {
 }
 
 .btn-close {
-    top: -10px;
-    right: -10px;
     float: right;
 }
 
-.ngb-alert {
+ngb-alert {
     text-align: center;
+}
+
+.stockup, .stockdown, .price {
+    display: inline;
+}
+
+@media (max-width: 499px) {
+    .entry {
+        /*padding: 10px;*/
+    }
+    .entry-title {
+
+    }
 }

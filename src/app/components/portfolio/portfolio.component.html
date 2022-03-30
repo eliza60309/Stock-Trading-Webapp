@@ -1,10 +1,11 @@
 <div class="container">
     <div class="title">My Portfolio</div>
     <div class="subtitle">Money in wallet: ${{cash}}</div>
+    <ngb-alert *ngIf="entrylist.length == 0" [dismissible]="false">Currently you don't have any stock.</ngb-alert>
     <ngb-alert *ngIf="buyMsg" type="success" (closed)="buyMsg = false">{{stock_id}} bought successfully</ngb-alert>
     <ngb-alert *ngIf="sellMsg" type="danger"(closed)="sellMsg = false">{{stock_id}} sold successfully</ngb-alert>
-    <ngb-alert *ngIf="entrylist.length == 0" [dismissible]="false">Currently you don't have any stock.</ngb-alert>
     <li *ngFor="let item of entrylist">
+        <!--
         <div class="card">
             <div class="card-header">
                 <div class="header-title">
@@ -33,7 +34,7 @@
                                             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                         </svg>
                                     </div>
-                                    {{round(item.c) - round(item.price)}}
+                                    {{round(round(item.c) - round(item.price))}}
                                 </td>
                             </tr>
                             <tr>
@@ -44,12 +45,56 @@
                             </tr>
                             <tr>
                                 <td>Total Cost:</td>
-                                <td class="align-right">{{round(item.unit) * round(item.price)}}</td>
+                                <td class="align-right">{{round(round(item.unit) * round(item.price))}}</td>
                                 <td>Market Value:</td>
                                 <td class="align-right" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">{{round(item.c) * round(item.unit)}}</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" (click)="buyButton(item.stock_id, item.price)">Buy</button>
+                <button type="button" class="btn btn-danger" (click)="sellButton(item.stock_id, item.price)">Sell</button>
+            </div>
+        </div>
+        -->
+
+        <div class="card">
+            <div class="card-header">
+                <div class="header-title">
+                    {{item.stock_id}}
+                </div>
+                <div class="header-subtitle">
+                    {{item.name}}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <div class="data">Quantity:</div>
+                    <div class="align-right data">{{item.unit}}</div>
+                    <div class="data">Avg. Cost / Share:</div>
+                    <div class="align-right data">{{round(item.price)}}</div>
+                    <div class="data">Total Cost:</div>
+                    <div class="align-right data">{{round(round(item.unit) * round(item.price))}}</div  >
+                    <div class="data">Change:</div>
+                    <div class="align-right data" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">
+                        <div id="stockup" *ngIf="round(item.c) > round(item.price)" style="display: inline;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
+                        </div>
+                        <div id="stockdown" *ngIf="round(item.c) < round(item.price)" style="display: inline;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </div>
+                        {{round(round(item.c) - round(item.price))}}
+                    </div>
+                    <div class="data">Current Price:</div>
+                    <div class="align-right data" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">{{round(item.c)}}</div>
+                    <div class="data">Market Value:</div>
+                    <div class="align-right data" [style]="{'color': round(item.c) == round(item.price)? 'black': round(item.c) > round(item.price)? 'green': 'red'}">{{round(item.c) * round(item.unit)}}</div>
                 </div>
             </div>
             <div class="card-footer">

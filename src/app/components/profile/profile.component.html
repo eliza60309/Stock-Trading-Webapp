@@ -1,15 +1,9 @@
  <div class="max">
     <app-search (cancelEvent)="resetURL()" >
     </app-search>
-    <mat-spinner *ngIf="loading" [diameter]="40">
+    <mat-spinner *ngIf="loading" [diameter]="100">
     </mat-spinner>
     <div class="container">
-        <!--
-        <app-banner  [hidden]="!profileDisplayed" [stock_id]="stock_id" (emitCompleteEvent)="receiveComplete()" (emitNoDataEvent)="receiveNoData()" (emitColorEvent)="receiveColor($event)">
-        </app-banner>
-        <app-tabs  [hidden]="!profileDisplayed" [stock_id]="stock_id" [colorGreen]="colorGreen">
-        </app-tabs>
-        -->
         <app-banner  [hidden]="!display">
         </app-banner>
         <app-tabs  [hidden]="!display" [stock_id]="stock_id" [colorGreen]="colorGreen">

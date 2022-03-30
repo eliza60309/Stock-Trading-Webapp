@@ -1,6 +1,8 @@
 <div class="container">
     <div class="title">My Watchlist</div>
     <ngb-alert *ngIf="entrylist.length == 0" [dismissible]="false">Currently you don't have any stock in your watchlist.</ngb-alert>
+    <ngb-alert *ngIf="followMsg" type="success" (closed)="followMsg = false">{{stock_id}} added to Watchlist</ngb-alert>
+    <ngb-alert *ngIf="unfollowMsg" type="danger"(closed)="unfollowMsg = false">{{stock_id}} removed from Watchlist</ngb-alert>
     <li *ngFor="let item of entrylist">
         <div class="entry" [routerLink]="'/search/' + item.stock_id" (click)="urlService.updateUrl(item.stock_id); routingService.page(1)">
             <button type="button" class="btn-close" aria-label="Close" (click)="watchlistService.remove(item.stock_id)"></button>
@@ -11,17 +13,18 @@
             <div class="right" [style]="{'color': item.price.d == 0? 'black': (item.price.d > 0? 'green': 'red')}">
                 <div class="entry-title nums">{{item.price.c}}</div>
                 <div class="entry-subtitle nums">
-                    <div id="stockup" *ngIf="item.price.d > 0" style="display: inline;">
+                    <div class="stockup" *ngIf="item.price.d > 0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
                             <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
                         </svg>
                     </div>
-                    <div id="stockdown" *ngIf="item.price.d < 0" style="display: inline;">
+                    <div class="stockdown" *ngIf="item.price.d < 0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                         </svg>
                     </div>
-                    {{item.price.d}}({{item.price.dp}}%)</div>
+                    <div class="price">{{item.price.d}}({{item.price.dp}}%)</div>
+                </div>
             </div>
         </div>
     </li>
