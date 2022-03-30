@@ -162,7 +162,7 @@ export class BannerComponent implements OnInit {
         this.tstring = new Date(this.t * 1000).toLocaleString('en-US', {'hour12': false});
         this.updateTime = new Date().getTime();
         this.utstring = new Date(this.updateTime).toLocaleString('en-US', {'hour12': false});
-        this.marketOpen = data.body.t * 1000 + 60000 > this.updateTime? true: false;
+        this.marketOpen = data.body.t * 1000 + 5 * 60000 > this.updateTime? true: false;
         //this.d >= 0? this.emitColorEvent.emit(true): this.emitColorEvent.emit(false);
         if(this.d >= 0)
           this.profileService.setTicker(true);

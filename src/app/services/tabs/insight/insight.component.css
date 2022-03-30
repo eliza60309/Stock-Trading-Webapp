@@ -19,6 +19,7 @@
     margin: 5% 2.5%;
     display: inline-block;
     min-width: 300px;
+    margin: auto;
 }
 
 @media (max-width: 499px) {

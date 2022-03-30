@@ -1,15 +1,16 @@
 ul {
     margin: auto;
     list-style-type: none;
-    width: 40%;
-    min-width: 300px;
+    width: 30%;
+    min-width: 250px;
     padding: 0px;
 }
 
 button {
     text-align: left;
     margin: auto;
-    width: 80%;
+    padding-left: 10px;
+    width: 90%;
     height: 50px;
     background-color: white;
     box-shadow: 0 3px 7px grey;
