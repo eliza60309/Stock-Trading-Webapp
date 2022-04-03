@@ -16,23 +16,25 @@ export class HeaderComponent implements OnInit {
       this.activate(tab);
       this.activeId = tab;
     });
+    this.urlService.listener$.subscribe((url: string) => {
+      this.activate(this.activeId);
+    });
+    this.urlService.homeMsgHook.subscribe((url: string) => {
+      this.activate(this.activeId);
+    });
   }
 
   ngOnInit(): void { }
-
-  getClass(num: number) {
-    if(num == this.activated)
-      return "active";
-    else
-      return "";
-  }
 
   getUrl() {
     return UrlService.url;
   }
 
   activate(num: number) {
-    this.activated = num;
+    if(num == 1 && UrlService.url == "home")
+      this.activated = 0;
+    else
+      this.activated = num;
     this.isMenuCollapsed = true;
   }
 }

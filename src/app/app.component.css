@@ -1,7 +1,15 @@
 .root {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     min-width: 300px;
+    margin-bottom: -20px;
+}
+.root:after {
+    content: "";
+    display: block;
+}
+.app-footer, .root:after {
+    height: 20px; 
 }
 .bg {
     position: absolute;

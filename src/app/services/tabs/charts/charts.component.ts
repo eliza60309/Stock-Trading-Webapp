@@ -26,7 +26,6 @@ export class ChartsComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-  
 
   updateChart(): void {
     this.update = false;
@@ -53,7 +52,9 @@ export class ChartsComponent implements OnInit {
       volume.push([data.t[i] * 1000, data.v[i]]);
     }
     this.setChartOption(UrlService.url, ohlc, volume);
+    setTimeout(() => { this.chartOptions = this.chartOptions }, 1000);
   }
+
   setChartOption(stock_id :string, ohlc: Array<any>, volume: Array<any>): void {
     this.chartOptions = {
       rangeSelector:{ selected: 2 },

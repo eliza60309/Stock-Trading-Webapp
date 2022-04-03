@@ -34,17 +34,16 @@
     {{reddit_pos}}<br>
     {{reddit_neg}}<br>
 -->
+  <highcharts-chart
+      *ngIf="update1"
+      [Highcharts]="Highcharts1" 
+      [options]="chartOptions1"
+      class="charts">
+  </highcharts-chart>
+  <highcharts-chart
+      *ngIf="update2"
+      [Highcharts]="Highcharts2" 
+      [options]="chartOptions2"
+      class="charts">
+  </highcharts-chart>
 </div>
-
-<highcharts-chart
-    *ngIf="update1"
-    [Highcharts]="Highcharts1" 
-    [options]="chartOptions1"
-    class="charts">
-</highcharts-chart>
-<highcharts-chart
-    *ngIf="update2"
-    [Highcharts]="Highcharts2" 
-    [options]="chartOptions2"
-    class="charts">
-</highcharts-chart>

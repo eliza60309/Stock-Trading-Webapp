@@ -51,6 +51,7 @@ export class SearchComponent implements OnInit {
 
   setUrlHome() {
     UrlService.url = 'home';
+    this.urlService.reset();
   }
 
   emitCancelEvent() {

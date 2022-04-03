@@ -47,15 +47,18 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void { }
 
   success() {
+    console.log("SUCCESS");
     this.display = true;
     this.loading = false;
+    this.error = false;
+    this.noInput = false;
   }
 
   failed() {
+    console.log("FAIL");
     this.error = true;
     this.loading = false;
     this.noInput = UrlService.empty;
-    //this.noInput = false;
   }
 
   reset() {

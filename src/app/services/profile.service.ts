@@ -92,7 +92,7 @@ export class ProfileService {
       this.checkDone();
     }
     else {
-      this.failed();
+      //this.failed();
     }
   }
 

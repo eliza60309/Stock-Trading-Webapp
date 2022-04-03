@@ -1,5 +1,6 @@
 import { InputModalityDetector } from '@angular/cdk/a11y';
 import { Component, OnInit, Input, Output} from '@angular/core';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
@@ -16,5 +17,10 @@ export class TabsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
-
+  clicked() {
+    setTimeout(() => {
+      console.log("resized");
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+  }
 }

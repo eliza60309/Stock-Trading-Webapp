@@ -26,7 +26,7 @@
   </ul>
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
 -->
-<mat-tab-group mat-stretch-tabs [selectedIndex]="0">
+<mat-tab-group mat-stretch-tabs [selectedIndex]="0" (click)="clicked()">
     <mat-tab label="Summary"><app-summary [colorGreen]="colorGreen"></app-summary></mat-tab>
     <mat-tab label="Top News"><app-top-news></app-top-news></mat-tab>
     <mat-tab label="Charts"><app-charts></app-charts></mat-tab>

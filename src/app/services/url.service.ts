@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { empty, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class UrlService {
@@ -7,7 +7,8 @@ export class UrlService {
   static empty: boolean = false;
   private static tunnel = new Subject<string>();
   listener$ = UrlService.tunnel.asObservable();
-
+  private static homeMsg = new Subject<string>();
+  homeMsgHook = UrlService.homeMsg.asObservable();
   constructor() { }
   
 
@@ -23,5 +24,9 @@ export class UrlService {
     //if(url != "home")
     //if(!UrlService.empty)
       UrlService.tunnel.next(url);
+  }
+
+  reset() {
+    UrlService.homeMsg.next("home");
   }
 }
