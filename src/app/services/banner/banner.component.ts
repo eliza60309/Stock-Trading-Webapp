@@ -15,6 +15,7 @@ export class BannerComponent implements OnInit {
 
   MSGTIMEOUT: number = 2000;//ms
 
+  request_id: number = 0;
   followMsg: boolean = false;
   unfollowMsg: boolean = false;
   buyMsg: boolean = false;
@@ -70,6 +71,7 @@ export class BannerComponent implements OnInit {
   }
   
   reset() {
+    this.request_id++;
     clearTimeout(this.errorTimeout);
     clearInterval(this.interval);
     clearTimeout(this.timeout);
@@ -155,8 +157,8 @@ export class BannerComponent implements OnInit {
         this.logo = data.body.logo;
         this.queryOK = true;
       }
-      else
-        this.failed();
+      //else
+      //  this.failed();
     });
   }
 
@@ -175,9 +177,9 @@ export class BannerComponent implements OnInit {
         this.d = this.round(data.body.d);
         this.dp = this.round(data.body.dp);
         this.t = this.round(data.body.t);
-        this.tstring = new Date(this.t * 1000).toLocaleString('en-US', {'hour12': false});
+        this.tstring = new Date(this.t * 1000).toLocaleString('en-US', {'hour12': false}).replace('/', '-').replace('/', '-').replace(',', '');
         this.updateTime = new Date().getTime();
-        this.utstring = new Date(this.updateTime).toLocaleString('en-US', {'hour12': false});
+        this.utstring = new Date(this.updateTime).toLocaleString('en-US', {'hour12': false}).replace('/', '-').replace('/', '-').replace(',', '');
         this.marketOpen = data.body.t * 1000 + 5 * 60000 > this.updateTime? true: false;
         //this.d >= 0? this.emitColorEvent.emit(true): this.emitColorEvent.emit(false);
         if(this.d >= 0)
