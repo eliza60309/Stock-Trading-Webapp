@@ -1,4 +1,4 @@
-<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-justified">
+<!--<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-justified">
     <li [ngbNavItem]="1" [destroyOnHide]="false">
         <a ngbNavLink class="text">Summary</a>
         <ng-template ngbNavContent>
@@ -24,5 +24,11 @@
         </ng-template>
     </li>
   </ul>
-  
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
+-->
+<mat-tab-group mat-stretch-tabs [selectedIndex]="0">
+    <mat-tab label="Summary"><app-summary [colorGreen]="colorGreen"></app-summary></mat-tab>
+    <mat-tab label="Top News"><app-top-news></app-top-news></mat-tab>
+    <mat-tab label="Charts"><app-charts></app-charts></mat-tab>
+    <mat-tab label="Insights"><app-insight></app-insight></mat-tab>
+</mat-tab-group>

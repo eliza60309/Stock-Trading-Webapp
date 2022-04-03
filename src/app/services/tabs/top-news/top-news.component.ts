@@ -53,11 +53,14 @@ export class TopNewsComponent implements OnInit {
     )
     .subscribe(data => {
       if(data.body && data.body.length > 0) {
+        let cnt = 0;
         this.list = data.body.filter((value: any) => {
-          if(value.image == "")
+          if(cnt >= 20 || value.image == "")
             return false;
-          else
+          else {
+            cnt++;
             return true;
+          }
         });
       }
     });

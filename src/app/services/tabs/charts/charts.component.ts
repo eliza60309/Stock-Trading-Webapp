@@ -29,6 +29,7 @@ export class ChartsComponent implements OnInit {
   
 
   updateChart(): void {
+    this.update = false;
     this.mainService.get(
       "candle",
       [{key: "STOCK_ID", value: UrlService.url},

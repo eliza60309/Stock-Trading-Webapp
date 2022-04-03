@@ -15,7 +15,14 @@ export class MainService {
     
     for (let item of params) {
       param = param.set(item.key, item.value);
-    }  
+    }
+
+    //let item = this.http.get<any>(this.url + suffix, {params: param, observe: 'response'});
+    //item.subscribe(data => {console.log(data.status)});
+    //return item;
+
+    
     return this.http.get<any>(this.url + suffix, {params: param, observe: 'response'});
+    
   }
 }

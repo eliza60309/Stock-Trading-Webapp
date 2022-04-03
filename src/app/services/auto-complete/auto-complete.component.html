@@ -7,10 +7,10 @@
                 </button>
             </li>
         </span>
-        <span *ngIf="!isLoading" >
+        <span *ngIf="!isLoading">
             <li *ngFor="let item of list">
-                <button [routerLink]="'/search/' + item.displaySymbol" (click)="this.urlService.updateUrl(item.displaySymbol); clicked()">
-                    <div class="stock">{{item.displaySymbol}}</div> | {{item.description}}
+                <button [routerLink]="'/search/' + item.symbol" (click)="this.urlService.updateUrl(item.displaySymbol); reset()">
+                    <div class="stock">{{item.symbol}}</div> | {{item.description}}
                 </button>
             </li>
         </span>

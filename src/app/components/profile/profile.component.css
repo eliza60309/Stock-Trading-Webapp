@@ -5,3 +5,10 @@
 mat-spinner {
     margin: auto;
 }
+
+ngb-alert {
+    width: 70%;
+    min-width: 400px;
+    margin: auto;
+    text-align: center;
+}

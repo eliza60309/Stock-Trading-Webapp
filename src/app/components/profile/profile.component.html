@@ -1,12 +1,14 @@
  <div class="max">
     <app-search (cancelEvent)="resetURL()" >
     </app-search>
+    <ngb-alert *ngIf="error && noInput" type="danger">Please enter a vaild ticker</ngb-alert>
+    <ngb-alert *ngIf="error && !noInput" type="danger">No data found, Please enter a valid Ticker</ngb-alert>
     <mat-spinner *ngIf="loading" [diameter]="100">
     </mat-spinner>
     <div class="container">
-        <app-banner  [hidden]="!display">
+        <app-banner [hidden]="!display">
         </app-banner>
-        <app-tabs  [hidden]="!display" [stock_id]="stock_id" [colorGreen]="colorGreen">
+        <app-tabs [hidden]="!display" [stock_id]="stock_id" [colorGreen]="colorGreen">
         </app-tabs>
     </div>
 </div>

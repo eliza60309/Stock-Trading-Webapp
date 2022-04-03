@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular'
 
@@ -35,6 +37,7 @@ import { TradeService } from './services/trade.service';
 import { BuyWindowComponent } from './services/modals/buy-window/buy-window.component';
 import { SellWindowComponent } from './services/modals/sell-window/sell-window.component';
 import { RoutingService } from './services/routing.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -67,7 +70,10 @@ import { RoutingService } from './services/routing.service';
     HttpClientModule,
     AppRouterModule,
     BrowserModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatTabsModule
   ],
   providers: [
     MainService,

@@ -23,7 +23,7 @@ export class WatchlistComponent implements OnInit {
     setTimeout(() => this.updateList(), 500);
     this.watchlistService.listener.subscribe((msg: string) => {
       this.followEventMsg(msg);
-      this.updateList()
+      this.updateList();
     });
   }
 
@@ -46,12 +46,12 @@ export class WatchlistComponent implements OnInit {
       this.entrylist.push({stock_id: this.watchlist[i], price: {c: 0, d: 0, dp: 0}, name: ""});
       this.getName(i, this.watchlist[i]);
       this.getQuote(i, this.watchlist[i]);
-      clearInterval(this.interval);
+      /*clearInterval(this.interval);
       this.interval = setInterval(() => {
         for(let i = 0; i < this.watchlist.length; i++) {
             this.getQuote(i, this.watchlist[i]);
         }
-      }, this.INTERVAL);
+      }, this.INTERVAL);*/
     }
   }
 

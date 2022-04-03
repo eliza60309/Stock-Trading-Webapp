@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   display: boolean = false;
   loading: boolean = false;
   error: boolean = false;
+  noInput: boolean = false;
   constructor(private urlService: UrlService, public profileService: ProfileService) {
     this.urlService.listener$.subscribe((url: string) => {
       //this.startWorking(url);
@@ -36,6 +37,11 @@ export class ProfileComponent implements OnInit {
         this.failed();
       }
     });
+
+    /*this.profileService.noInputHook.subscribe((bool: boolean) => {
+      console.log('no data');
+      setTimeout(() => this.noInput = true, 300);
+    });*/
    }
 
   ngOnInit(): void { }
@@ -48,18 +54,21 @@ export class ProfileComponent implements OnInit {
   failed() {
     this.error = true;
     this.loading = false;
+    this.noInput = UrlService.empty;
+    //this.noInput = false;
   }
 
   reset() {
     this.display = false;
     this.error = false;
     this.loading = false;
+    //this.noInput = false;
   }
 
   resetURL() {
-    this.urlService.updateUrl("home");
     this.reset();
   }
+
   /*
   startWorking(url: string) {
     if(url != "" && url != "home") {

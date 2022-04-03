@@ -10,6 +10,12 @@ export class ProfileService {
   private static colormsg = new Subject<boolean>();
   listener2 = ProfileService.colormsg.asObservable();
 
+  private static clearAutoComplete = new Subject<boolean>();
+  hook = ProfileService.clearAutoComplete.asObservable();
+
+  /*private static noInputMsg = new Subject<boolean>();
+  noInputHook = ProfileService.noInputMsg.asObservable();*/
+
   static loading: boolean = false;
   static showProfile: boolean = false;
   static showError: boolean = false;
@@ -121,4 +127,12 @@ export class ProfileService {
   updateProfile(msg: string) {
     ProfileService.tunnel.next(msg);
   }
+
+  clearAutoComplete(bool: boolean) {
+    ProfileService.clearAutoComplete.next(bool);
+  }
+
+  /*noInput() {
+    ProfileService.noInputMsg.next(true);
+  }*/
 }

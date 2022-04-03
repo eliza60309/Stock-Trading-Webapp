@@ -72,7 +72,7 @@ export class PortfolioService {
   }
 
   updatePortfolio(method: string, target: string) {
-    console.log(PortfolioService.portfolio);
+    //console.log(PortfolioService.portfolio);
     localStorage.setItem('portfolio', JSON.stringify(PortfolioService.portfolio));
     localStorage.setItem('cash', JSON.stringify(PortfolioService.cash));
     PortfolioService.tunnel.next(method + "<partitionerYAYA>" + target);

@@ -42,17 +42,22 @@ export class BannerComponent implements OnInit {
   utstring: string = "";
   timeout: any = null;
   interval: any = null;
+  errorTimeout: any = null;
+
+  queryOK: boolean = false;
+  quoteOK: boolean = false;
   constructor(private mainService: MainService, private urlService: UrlService, public watchlistService: WatchlistService, public profileService: ProfileService, public portfolioService: PortfolioService, private tradeService: TradeService) {
     this.updateTime = new Date().getTime();
     this.urlService.listener$.subscribe((url: string) => {
+      this.reset();
       this.stock_id = url;
       this.updateQuery();
       this.updateQuote();
       clearTimeout(this.timeout);
       clearInterval(this.interval);
-      this.timeout = setTimeout(() => this.loadComplete(), 5000);
+      this.timeout = setTimeout(() => this.loadComplete(), 3000);
       this.interval = setInterval(() => this.updateQuote(), 15000);
-      this.emitted = false;
+      //this.errorTimeout = setTimeout(() => this.emitted? void(0): this.failed(), 10000);
       this.checkFollow();
       this.updateQuant();
     });
@@ -64,6 +69,15 @@ export class BannerComponent implements OnInit {
     this.watchlistService.listener.subscribe((url: string) => this.msgFollow(url));
   }
   
+  reset() {
+    clearTimeout(this.errorTimeout);
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+    this.emitted = false;
+    this.queryOK = false;
+    this.quoteOK = false;
+  }
+
   ngOnInit(): void { }
 
   msgFollow(msg:string) {
@@ -114,7 +128,7 @@ export class BannerComponent implements OnInit {
   }
 
   loadComplete() {
-    if(!this.emitted) {
+    if(!this.emitted && this.queryOK && this.quoteOK) {
       //this.emitCompleteEvent.emit();
       this.profileService.bannerUpdate(true);
       this.emitted = true;
@@ -125,6 +139,7 @@ export class BannerComponent implements OnInit {
   failed() {
     this.profileService.bannerUpdate(false);
     this.emitted = true;
+    clearInterval(this.interval);
   }
 
   updateQuery(): void {
@@ -138,6 +153,7 @@ export class BannerComponent implements OnInit {
         this.name = data.body.name;
         this.exchange = data.body.exchange;
         this.logo = data.body.logo;
+        this.queryOK = true;
       }
       else
         this.failed();
@@ -168,6 +184,7 @@ export class BannerComponent implements OnInit {
           this.profileService.setTicker(true);
         else
           this.profileService.setTicker(false);
+        this.quoteOK = true;
       }
       else {
         this.failed();
